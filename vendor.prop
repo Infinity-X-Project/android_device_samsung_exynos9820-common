@@ -69,6 +69,11 @@ ro.vendor.ddk.set.afbc=1
 ## Incremental FS
 ro.incremental.enable=true
 
+## LMK
+ro.lmk.use_psi=true
+ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_timeout_ms=100
+
 ## Metadata Encryption
 ro.crypto.dm_default_key.options_format.version=2
 # Call deleteAllKeys if vold detects a factory reset
