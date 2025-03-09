@@ -30,7 +30,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
-    audio.primary.exynos9820 \
     audio.r_submix.default \
     audio.usb.default
 
@@ -80,7 +79,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.composer.hwc3-service.slsi \
-    gralloc.exynos9820 \
     libion
 
 # Doze
@@ -289,6 +287,7 @@ PRODUCT_PACKAGES += \
     libdsms_vendor:64
 
 PRODUCT_PACKAGES += \
+    cbd \
     secril_config_svc \
     sehradiomanager
 
@@ -310,7 +309,10 @@ PRODUCT_SOONG_NAMESPACES += \
     $(COMMON_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
-    hardware/samsung
+    hardware/samsung \
+    hardware/samsung_slsi-linaro/exynos/cpboot_v3 \
+    hardware/samsung_slsi-linaro/exynos/libaudio/audiohal \
+    hardware/samsung_slsi-linaro/exynos/gralloc/gralloc3
 
 # S Pen
 ifeq ($(TARGET_HAVE_SPEN),true)

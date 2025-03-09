@@ -31,7 +31,8 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
 ## Audio
-BOARD_LOW_LATENCY_CAPTURE_DURATION := 20
+$(call soong_config_set,exynos_audio,PREDEFINED_LOW_CAPTURE_DURATION,20)
+$(call soong_config_set,exynos_audio,PROXY_LIBRARY,//device/samsung/exynos9820-common:libaudioproxy)
 
 ## Bluetooth
 BOARD_CUSTOM_BT_CONFIG := $(COMMON_PATH)/bluetooth/libbt_vndcfg.txt
@@ -150,6 +151,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
 
 ## RIL
 ENABLE_VENDOR_RIL_SERVICE := true
+
+$(call soong_config_set,cbd,protocol,sipc)
+$(call soong_config_set,cbd,use_legacy_sipc_ioctl,true)
 
 ## SELinux
 BOARD_SEPOLICY_TEE_FLAVOR := teegris
