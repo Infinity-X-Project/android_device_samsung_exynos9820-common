@@ -27,6 +27,9 @@ BOARD_BOOTIMG_HEADER_VERSION := 1
 
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
+## Camera
+$(call soong_config_set,samsungCameraVars,needs_acquire_fence_workaround,true)
+
 ## Dynamic Partitions
 BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 
@@ -42,5 +45,4 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67633152
 TARGET_RECOVERY_FSTAB_GENRULE := gen_fstab.exynos9820
 
 ## Verified Boot
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --include_descriptors_from_image $(PRODUCT_OUT)/dtb.img
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
