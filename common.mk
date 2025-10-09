@@ -333,7 +333,3 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
-
-# Project Infinity X Flags
-INFINITY_BUILD_TYPE := OFFICIAL
-INFINITY_MAINTAINER := FrEeRuNnEr4EvEr
