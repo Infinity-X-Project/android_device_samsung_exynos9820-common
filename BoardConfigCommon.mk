@@ -138,6 +138,7 @@ include hardware/samsung_slsi-linaro/config/BoardConfig9820.mk
 
 ## Properties
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
+TARGET_PRODUCT_PROP += $(COMMON_PATH)/product.prop
 
 ## Recovery
 BOARD_INCLUDE_RECOVERY_DTBO := true
