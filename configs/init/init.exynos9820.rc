@@ -527,7 +527,7 @@ on post-fs-data
 
 on boot
 # SSWAP
-    write /proc/sys/vm/swappiness 160
+    write /proc/sys/vm/swappiness 80
 
 # Bluetooth
     chown bluetooth bluetooth /dev/ttySAC1
