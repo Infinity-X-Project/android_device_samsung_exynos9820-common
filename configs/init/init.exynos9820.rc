@@ -586,6 +586,11 @@ on boot
     chmod 0664 /sys/power/cpuhp/enabled
     chmod 0664 /sys/power/cpuhp/set_online_cpu
 
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/up_rate_limit_us 5000
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/down_rate_limit_us 5000
+    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 5000
+    write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 5000
+
     # CPU C-state node
     chown radio system /sys/module/cpuidle/parameters/off
     chmod 0664 /sys/module/cpuidle/parameters/off
