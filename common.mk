@@ -87,6 +87,18 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
+# AOSP userspace IMS and framework bearer services
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/infinity/imsstack-carrier-config-ext
+
+$(call inherit-product, packages/modules/ImsMedia/imsmedia.mk)
+$(call soong_config_set,imsstack_namespace,use_carrier_config_ext,true)
+
+PRODUCT_PACKAGES += \
+    ImsStack \
+    Iwlan \
+    QualifiedNetworksService
+
 # fastbootd
 PRODUCT_PACKAGES += \
     fastbootd
