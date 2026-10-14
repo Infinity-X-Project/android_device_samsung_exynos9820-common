@@ -85,3 +85,4 @@
 
 ## Vendor
 /(vendor|system/vendor)/bin/hw/gps.sh                                                               u:object_r:gpsd_exec:s0
+/vendor/bin/hw/rild                                                                                 u:object_r:rild_exec:s0
