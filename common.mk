@@ -118,6 +118,10 @@ PRODUCT_PACKAGES += \
 # IMS
 $(call inherit-product, hardware/lineage/generic-ims/ims.mk)
 
+# ImsStack
+PRODUCT_PACKAGES += \
+    ImsStackResCommon
+
 # init
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/init/init.exynos9820.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.exynos9820.rc \
