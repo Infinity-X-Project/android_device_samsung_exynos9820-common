@@ -49,3 +49,9 @@ genfscon sysfs /devices/virtual/sec/sensorhub/mcu_power                         
 
 # Kernel
 genfscon sysfs /kernel/mm/vmscan/mem_boost_mode                                                                         u:object_r:sysfs_mem_boost_writable:s0
+
+# Video device discovery must not read generic, unlabeled sysfs files.
+genfscon sysfs /devices/platform/18b00000.smfc/video4linux/video12/name u:object_r:sysfs_v4l:s0
+
+# The port exposes this GPS control directly rather than through gpio_export.
+genfscon sysfs /devices/virtual/sec/gps/GPS_PWR_EN/value u:object_r:sysfs_gps_writable:s0

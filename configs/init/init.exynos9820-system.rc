@@ -1,0 +1,7 @@
+# Platform-owned paths must be initialized by init, not vendor_init.
+on early-init
+    restorecon /dev/kmsg_debug
+
+on post-fs-data
+    mkdir /data/nfc 0770 nfc nfc
+    restorecon_recursive /data/nfc

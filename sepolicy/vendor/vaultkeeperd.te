@@ -1,0 +1,1 @@
+allow vaultkeeperd log_vendor_data_file:dir search;

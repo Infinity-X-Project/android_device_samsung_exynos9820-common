@@ -12,3 +12,7 @@ get_prop(vendor_init, vts_status_prop)
 
 # Configure the default utilization clamp for real-time tasks.
 allow vendor_init proc_sched:file w_file_perms;
+
+set_prop(vendor_init, vendor_product_ship_prop)
+# The shared Dolby policy exports this build-time version to system clients.
+set_prop(vendor_init, exported_system_prop)

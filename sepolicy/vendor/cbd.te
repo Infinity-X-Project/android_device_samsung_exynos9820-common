@@ -1,1 +1,3 @@
 allow cbd radio_device:chr_file rw_file_perms;
+
+wakelock_use(cbd)

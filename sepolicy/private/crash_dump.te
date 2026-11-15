@@ -1,0 +1,7 @@
+# Read mapped overlay resources while collecting native backtraces.
+r_dir_file(crash_dump, resourcecache_data_file)
+
+# Label crash_dump's own memfd snapshots instead of granting writes to tmpfs.
+type crash_dump_tmpfs, file_type;
+tmpfs_domain(crash_dump)
+allow crash_dump crash_dump_tmpfs:file { create open };

@@ -1,0 +1,3 @@
+# Report thermal statistics through the framework stats service.
+allow hal_thermal_default fwk_stats_service:service_manager find;
+binder_call(hal_thermal_default, stats_service_server)
