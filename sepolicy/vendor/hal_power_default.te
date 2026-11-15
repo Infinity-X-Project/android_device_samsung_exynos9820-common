@@ -2,3 +2,6 @@ allow hal_power_default pm_qos_device:chr_file rw_file_perms;
 
 allow hal_power_default sysfs_battery:dir search;
 allow hal_power_default sysfs_battery_writable:file rw_file_perms;
+
+# Write the top-app utilization clamp for interaction boosts.
+allow hal_power_default cgroup:file rw_file_perms;
