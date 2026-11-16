@@ -567,17 +567,6 @@ on boot
     chmod 0770 /mnt/vendor/efs/bluetooth
     chmod 0660 /mnt/vendor/efs/bluetooth/bt_addr
 
-# SDHMS Slowdown : Cpuset
-    mkdir /dev/cpuset/abnormal
-    write /dev/cpuset/abnormal/cpus 0-3
-    copy /dev/cpuset/mems /dev/cpuset/abnormal/mems
-
-    chown system system /dev/cpuset/abnormal
-    chown system system /dev/cpuset/abnormal/tasks
-    chown system system /dev/cpuset/abnormal/cpus
-    chmod 0664 /dev/cpuset/abnormal/tasks
-    chmod 0664 /dev/cpuset/abnormal/cpus
-
 # CPUSET(9820)
     chown system system /dev/cpuset/top-app/cpus
     chown system system /dev/cpuset/foreground/cpus
