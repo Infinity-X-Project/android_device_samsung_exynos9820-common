@@ -1,1 +1,4 @@
 get_prop(surfaceflinger, vendor_hwc_prop)
+
+# RenderEngine queries the dma-buf pseudo filesystem, which the kernel leaves unlabeled.
+allow surfaceflinger unlabeled:filesystem getattr;
