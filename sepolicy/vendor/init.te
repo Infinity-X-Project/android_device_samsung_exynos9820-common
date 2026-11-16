@@ -11,4 +11,4 @@ allow init kernel:system module_request;
 allow init sysfs_block_writable:file rw_file_perms;
 
 # A first-stage debug node may survive into a user-build second-stage init.
-allow init kmsg_debug_device:chr_file relabelto;
+allow init kmsg_debug_device:chr_file { relabelto w_file_perms };
