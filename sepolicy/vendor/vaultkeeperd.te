@@ -1,1 +1,3 @@
 allow vaultkeeperd log_vendor_data_file:dir search;
+allow vaultkeeperd log_vendor_data_file:dir rw_dir_perms;
+allow vaultkeeperd log_vendor_data_file:file create_file_perms;
