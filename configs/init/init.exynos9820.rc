@@ -567,22 +567,6 @@ on boot
     chmod 0770 /mnt/vendor/efs/bluetooth
     chmod 0660 /mnt/vendor/efs/bluetooth/bt_addr
 
-# CPUSET(9820)
-    chown system system /dev/cpuset/top-app/cpus
-    chown system system /dev/cpuset/foreground/cpus
-    chown system system /dev/cpuset/background/cpus
-    chown system system /dev/cpuset/system-background/cpus
-    chown system system /dev/cpuset/cpus
-    chmod 664 /dev/cpuset/top-app/cpus
-    chmod 664 /dev/cpuset/foreground/cpus
-    chmod 664 /dev/cpuset/background/cpus
-    chmod 664 /dev/cpuset/system-background/cpus
-    chmod 664 /dev/cpuset/cpus
-    write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/foreground/cpus 0-2,4-7
-    write /dev/cpuset/background/cpus 0-2
-    write /dev/cpuset/system-background/cpus 0-2
-
     setprop vendor.powerhal.init 1
 
 # Ownership and permissions for SEC PM
