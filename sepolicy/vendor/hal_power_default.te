@@ -8,8 +8,10 @@ allow hal_power_default cgroup:file rw_file_perms;
 
 hal_client_domain(hal_power_default, hal_thermal)
 
-# ADPF hint sessions set the priority of the threads they manage.
+# ADPF hint sessions set the priority and scheduling of the threads they manage.
 allow hal_power_default self:capability sys_nice;
+allow hal_power_default appdomain:process { getsched setsched };
+allow hal_power_default { surfaceflinger hal_graphics_composer_default system_server }:process setsched;
 
 # Binder callbacks from servicemanager to the HAL service.
 binder_use(hal_power_default)
