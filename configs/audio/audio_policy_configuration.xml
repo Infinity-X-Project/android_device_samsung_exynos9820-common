@@ -29,6 +29,15 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
+                <mixPort name="compressed_offload" role="source"
+                         flags="AUDIO_OUTPUT_FLAG_DIRECT AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD AUDIO_OUTPUT_FLAG_NON_BLOCKING">
+                    <profile name="" format="AUDIO_FORMAT_MP3"
+                             samplingRates="11025 16000 22050 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO"/>
+                    <profile name="" format="AUDIO_FORMAT_FLAC"
+                             samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
                 <mixPort name="primary-in" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
@@ -123,9 +132,9 @@
                 <route type="mix" sink="Speaker"
                        sources="primary-out,deep-buffer,fast"/>
                 <route type="mix" sink="Wired Headset"
-                       sources="primary-out,deep-buffer,fast"/>
+                       sources="primary-out,deep-buffer,fast,compressed_offload"/>
                 <route type="mix" sink="Wired Headphone"
-                       sources="primary-out,deep-buffer,fast"/>
+                       sources="primary-out,deep-buffer,fast,compressed_offload"/>
                 <route type="mix" sink="Bt Sco"
                        sources="primary-out,deep-buffer,fast"/>
                 <route type="mix" sink="Bt Sco Headset"
