@@ -74,6 +74,8 @@ ro.crypto.volume.metadata.method=dm-default-key
 
 ## Power HAL
 vendor.powerhal.disp.idle_support=false
+# SurfaceFlinger reports its frame work to the power HAL (ADPF hint session)
+debug.sf.enable_adpf_cpu_hint=true
 
 ## RIL
 vendor.sec.rild.libpath=/vendor/lib64/libsec-ril.so
