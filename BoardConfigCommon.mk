@@ -142,6 +142,12 @@ include hardware/samsung_slsi-linaro/config/BoardConfig9820.mk
 ## Properties
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
+## Ramdisk
+# The kernel Image is shipped uncompressed (about 52 MB, as in the stock boot
+# image), which leaves the 64.5 MiB recovery partition too little room for a gzip
+# ramdisk. xz keeps recovery.img well inside it. The kernel enables CONFIG_RD_XZ.
+BOARD_RAMDISK_USE_XZ := true
+
 ## Recovery
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_USES_FULL_RECOVERY_IMAGE := true
