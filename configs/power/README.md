@@ -120,9 +120,13 @@ Values chosen here:
    scale). Init 100 stays on little, High 384 is about 1.3 GHz on mid, the surfaceflinger session
    at 157 sits just above the 10% step that moves it to mid.
 
-The task profiles in task_profiles.json are the ones the power HAL applies (PreferIdleSet,
-SCHED_QOS_*). They are Pixel kernel scheduler tags with no counterpart here, so they are empty
-and only make the calls succeed. The per-thread clamps are set by the HAL with sched_setattr.
+The task profiles in task_profiles.json are the ones the power HAL applies. SCHED_QOS_SENSITIVE_EXTREME
+is applied to the threads of the SystemUI, HWUI and SurfaceFlinger hint sessions. Those processes run in
+the foreground cpu cgroup, which has no floor and no latency flag, so the top-app floors never reached
+them. It is an alias of AOSP's MaxPerformance profile, which joins the top-app cpu cgroup. PreferIdleSet,
+SCHED_QOS_SENSITIVE_STANDARD and SCHED_QOS_NONE are Pixel scheduler tags with no counterpart here and stay empty
+(apps in the foreground are already in top-app; the profile cannot know a thread's earlier cgroup). The
+per-thread clamps of a hint session are set by the HAL itself with sched_setattr.
 
 Not measured: the effect of the real-time default (sched_util_clamp_min_rt_default is 0 in
 init.exynos9820.rc) on audio threads, and the power cost of any value above.

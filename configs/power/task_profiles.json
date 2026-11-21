@@ -11,10 +11,12 @@
     {
       "Name": "SCHED_QOS_SENSITIVE_STANDARD",
       "Actions": []
-    },
+    }
+  ],
+  "AggregateProfiles": [
     {
       "Name": "SCHED_QOS_SENSITIVE_EXTREME",
-      "Actions": []
+      "Profiles": [ "MaxPerformance" ]
     }
   ]
 }
