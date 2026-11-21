@@ -552,6 +552,15 @@ on boot
     chmod 0770 /mnt/vendor/efs/bluetooth
     chmod 0660 /mnt/vendor/efs/bluetooth/bt_addr
 
+# CPUSET(9820)
+    # Samsung's layout: background work stays on the little cores 0-2, and
+    # CPU3 is left to top-app. Needs CONFIG_CPUSETS_V1 in the kernel, which
+    # provides the /dev/cpuset hierarchy.
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-2,4-7
+    write /dev/cpuset/background/cpus 0-2
+    write /dev/cpuset/system-background/cpus 0-2
+
     setprop vendor.powerhal.init 1
 
 # Ownership and permissions for SEC PM
