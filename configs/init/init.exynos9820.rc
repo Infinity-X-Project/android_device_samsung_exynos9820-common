@@ -3,7 +3,8 @@ on init
     symlink /dev/block/platform/13d60000.ufs/by-name/persistent /dev/block/persistent
 
     # Use utilization clamping instead of the downstream schedtune interface.
-    # The power HAL raises the top-app minimum to 30% during interaction.
+    # The power HAL raises the top-app minimum to 30% during interaction and
+    # to 50% while an app launches (configs/power/powerhint.json).
     chown system system /dev/cpuctl/top-app/cpu.uclamp.min
     chmod 0664 /dev/cpuctl/top-app/cpu.uclamp.min
     write /dev/cpuctl/top-app/cpu.uclamp.min 5

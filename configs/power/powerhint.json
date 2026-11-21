@@ -16,11 +16,12 @@
             "Name": "TAUclampMin",
             "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
             "Values": [
+                "50",
                 "30",
                 "5"
             ],
             "ResetOnInit": true,
-            "DefaultIndex": 1
+            "DefaultIndex": 2
         },
         {
             "Name": "PMQoSCpuDmaLatency",
@@ -80,6 +81,12 @@
             "Node": "PMQoSCpuDmaLatency",
             "Duration": 5000,
             "Value": "0x0000002c"
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "TAUclampMin",
+            "Duration": 5000,
+            "Value": "50"
         },
         {
             "PowerHint": "CAMERA_LAUNCH",
