@@ -32,22 +32,6 @@ on init
     chmod 0644 /dev/freezer/olaf/cgroup.procs
     chmod 0644 /dev/freezer/olaf/freezer.state
 
-# PAS Setting
-    chown system system /sys/kernel/ems/eff_mode
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/schedutil/freqvar_st_boost
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/schedutil/freqvar_st_boost
-    chown system system /sys/devices/system/cpu/cpu6/cpufreq/schedutil/freqvar_st_boost 
-
-    write /sys/kernel/ems/eff_mode 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/freqvar_st_boost 5
-    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/freqvar_st_boost 20
-    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/freqvar_st_boost 5
-
-    chmod 0664 /sys/kernel/ems/eff_mode
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/schedutil/freqvar_st_boost
-    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/schedutil/freqvar_st_boost
-    chmod 0664 /sys/devices/system/cpu/cpu6/cpufreq/schedutil/freqvar_st_boost
-
 # EPIC interfaces
     chown system system /dev/cluster0_freq_min
     chown system system /dev/cluster1_freq_min
