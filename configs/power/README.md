@@ -78,3 +78,51 @@ See https://www.kernel.org/doc/Documentation/power/pm_qos_interface.txt
     260000 -> 0x00003f7a0
     200000 -> 0x000030d40
     156000 -> 0x000026160
+
+## Utilization clamping (uclamp)
+
+Measured on the mainline kernel (7.3, schedutil, energy-aware scheduling on), one run per point on
+an idle phone. A temporary cpu cgroup carried a load pinned to one CPU of a cluster; the
+frequency is the dominant cpufreq state while the load ran.
+
+The frequency follows the clamp linearly, with no headroom margin:
+`f = fmax * (clamp% / 100) * 1024 / cpu_capacity`, rounded up to the next operating point.
+The little, mid and big clusters have capacity 355, 693 and 1024 (34.7%, 67.7% and 100% of the
+scale), so the same percentage means very different frequencies.
+
+`cpu.uclamp.min` (MHz, little / mid / big):
+
+     0%   442 /  507 /  520
+     5%   442 /  507 /  520    (below every cluster's lowest step: no effect on frequency)
+    10%   650 /  507 /  520
+    20%  1157 /  754 /  624
+    30%  1742 / 1066 /  819
+    40%  1950 / 1404 / 1144
+    60%  1950 / 2106 / 1664
+   100%  1950 / 2314 / 2730
+
+`cpu.uclamp.max` caps the frequency the same way. It has no effect above a cluster's capacity
+(above 34.7% on little, above 67.7% on mid).
+
+Placement follows the floor. A light unclamped task stays on the little cluster (about 95%). Any
+floor of 10% or more moves it to the mid cluster, and a floor above the mid capacity (67.7%)
+moves it to the big cluster, which has only two CPUs.
+
+Values chosen here:
+
+ - top-app `cpu.uclamp.min` 5%: the idle default. It does not change frequency; the latency
+   sensitive flag is what carries over from the old schedtune prefer_idle.
+ - INTERACTION 30%: touch boost, runs top-app on the mid cluster at about 1.1 GHz.
+ - LAUNCH 50%: app launch, mid cluster at about 1.7 GHz. It stays below the mid capacity on
+   purpose: a floor of 70% would only fit the two big CPUs and could pile every launch thread
+   onto them.
+ - ADPF sessions use per-thread clamps from the power HAL (powerhint.json, AdpfConfig, 0-1024
+   scale). Init 100 stays on little, High 384 is about 1.3 GHz on mid, the surfaceflinger session
+   at 157 sits just above the 10% step that moves it to mid.
+
+The task profiles in task_profiles.json are the ones the power HAL applies (PreferIdleSet,
+SCHED_QOS_*). They are Pixel kernel scheduler tags with no counterpart here, so they are empty
+and only make the calls succeed. The per-thread clamps are set by the HAL with sched_setattr.
+
+Not measured: the effect of the real-time default (sched_util_clamp_min_rt_default is 0 in
+init.exynos9820.rc) on audio threads, and the power cost of any value above.
