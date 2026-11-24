@@ -1,0 +1,9 @@
+# Dolby Vision service (/vendor/bin/hw/dvs-hal-service). hardware/dolby labels
+# the binary but defines no domain for it, so it ran in init.
+type hal_dvs_default, domain;
+init_daemon_domain(hal_dvs_default)
+
+type hal_dvs_hwservice, hwservice_manager_type;
+hwbinder_use(hal_dvs_default)
+add_hwservice(hal_dvs_default, hal_dvs_hwservice)
+get_prop(hal_dvs_default, hwservicemanager_prop)
