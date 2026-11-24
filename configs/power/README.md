@@ -112,10 +112,23 @@ Values chosen here:
 
  - top-app `cpu.uclamp.min` 5%: the idle default. It does not change frequency; the latency
    sensitive flag is what carries over from the old schedtune prefer_idle.
- - INTERACTION 30%: touch boost, runs top-app on the mid cluster at about 1.1 GHz.
- - LAUNCH 50%: app launch, mid cluster at about 1.7 GHz. It stays below the mid capacity on
+ - INTERACTION 40%: touch boost, above the little capacity (34.7%), so boosted tasks leave the
+   little cluster; mid cluster at about 1.4 GHz. 30% still fit a little core at full speed.
+ - LAUNCH 60%: app launch, mid cluster at about 2.1 GHz. It stays below the mid capacity on
    purpose: a floor of 70% would only fit the two big CPUs and could pile every launch thread
    onto them.
+ - The same INTERACTION and LAUNCH floors go to the foreground cpu cgroup (FGUclampMin), where
+   SystemUI and the launcher's helpers run; it draws much of the recents and app transitions.
+
+Measured 2026-11-24 (kernel 7.3, recents open/close, app open/close and recents paging, floors
+held for the whole run; janky frames / 99th percentile):
+
+                                    launcher        SystemUI
+    no floor                        4.1% / 34 ms    6.6% / 44 ms
+    top-app 30                      2.5% / 29 ms    3.5% / 28 ms
+    top-app + foreground 40         1.5% / 29 ms    1.1% / 48 ms
+    top-app + foreground 60         1.5% / 34 ms    0.0% / 11 ms
+    all CPUs at max (reference)     0.55% / 19 ms   1.1% / 17 ms
  - ADPF sessions use per-thread clamps from the power HAL (powerhint.json, AdpfConfig, 0-1024
    scale). Init 100 stays on little, High 384 is about 1.3 GHz on mid, the surfaceflinger session
    at 157 sits just above the 10% step that moves it to mid.

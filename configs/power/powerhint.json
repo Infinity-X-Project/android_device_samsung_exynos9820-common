@@ -16,9 +16,20 @@
             "Name": "TAUclampMin",
             "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
             "Values": [
-                "50",
-                "30",
+                "60",
+                "40",
                 "5"
+            ],
+            "ResetOnInit": true,
+            "DefaultIndex": 2
+        },
+        {
+            "Name": "FGUclampMin",
+            "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
+            "Values": [
+                "60",
+                "40",
+                "0"
             ],
             "ResetOnInit": true,
             "DefaultIndex": 2
@@ -68,7 +79,13 @@
             "PowerHint": "INTERACTION",
             "Node": "TAUclampMin",
             "Duration": 0,
-            "Value": "30"
+            "Value": "40"
+        },
+        {
+            "PowerHint": "INTERACTION",
+            "Node": "FGUclampMin",
+            "Duration": 0,
+            "Value": "40"
         },
         {
             "PowerHint": "INTERACTION",
@@ -86,7 +103,13 @@
             "PowerHint": "LAUNCH",
             "Node": "TAUclampMin",
             "Duration": 5000,
-            "Value": "50"
+            "Value": "60"
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "FGUclampMin",
+            "Duration": 5000,
+            "Value": "60"
         },
         {
             "PowerHint": "CAMERA_LAUNCH",
